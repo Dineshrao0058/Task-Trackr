@@ -7,5 +7,7 @@ let corsOption = { origin: ["http://localhost:4000"] };
 
 route.post("/assignments", cors(corsOption), controller.assignment);
 route.get("/viewAssignments", cors(corsOption), controller.viewAssignment);
+route.put("/updateAssignment/:id", cors(corsOption), controller.updateAssignment);
+route.delete("/deleteAssignment/:id", cors(corsOption), controller.deleteAssignment);
 
 module.exports = route;
