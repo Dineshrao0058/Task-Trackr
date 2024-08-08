@@ -12,11 +12,11 @@ const upload = photoUpload.single("file");
 exports.addStudent = async(req, res)=>{
     upload(req, res, async (error)=>{
         if (error) {
-            return res.status(500).json({error:"failed to upload photo"});
+            return res.status(500).json({error:"Failed to Upload Photoo"});
         }
         try {
             if (!req.file) {
-                return res.status(400).json({error:"no file uploaded"})
+                return res.status(400).json({error:"no file has uploaded"})
             }
             const studentData = {
               name:req.body.name,
@@ -62,15 +62,6 @@ exports.getStudent = async (req,res)=>{
         res.status(500).json({error:"failed to get students"})
     }
 };
-// exports.updateStudent = async(req,res)=>{
-//     try {
-//         const update = await studentModel.findByIdAndUpdate(req.params.id,req.body);
-//         res.status(200).json(update);
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({error:"failed to delete student"});
-//     }
-// };
 exports.updateStudent = async(req, res)=>{
     upload(req, res, async (error)=>{
         if (error) {
@@ -91,7 +82,7 @@ exports.updateStudent = async(req, res)=>{
             if (!student) {
                 return res.status(404).json({ error: "student not found" });
             }
-            return res.status(200).json(student);
+            return res.status(200).json( student);
         } catch (error) {
             console.log(error);
            return res.status(500).json({error:"server error"})
