@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const projectSchema = new mongoose.Schema(
   {
     studentId: {
-      type: String,
-      require: true,
+          type: String,
+          require: true,
     },
     projectTitle: {
       type: String,
