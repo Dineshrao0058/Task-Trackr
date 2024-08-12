@@ -1,5 +1,6 @@
 const teamleadModel = require("../../admin/models/teamleadModel");
 const multer = require("multer");
+const jwt = require("jsonwebtoken")
 const storage = multer.diskStorage({
   destination: "images/",
   filename: (req, file, cb) => {
@@ -42,6 +43,28 @@ exports.addTeamlead = async (req, res) => {
     }
   });
 };
+
+// teamlead login
+exports.teamleadlogin = async (req, res) => {
+  try {
+    const teamlead = await teamleadModel.findOne({
+      email: req.body.email,
+      password: req.body.password,
+    });
+    if (!teamlead) {
+      return res.status(404).json("error");
+    }
+    const teamleadPassKey = "task";
+    const token = jwt.sign({ email: teamlead.email }, teamleadPassKey, {
+      expiresIn: "2hr",
+    });
+    res.status(200).json({ teamlead, token });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "no data found" });
+  }
+};
+
 
 //updateTeamlead
 
