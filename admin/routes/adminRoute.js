@@ -1,4 +1,4 @@
-const express = require("express")
+const express = require("express");
 const adminController = require("../controllers/adminController")
 const teamleadController = require('../controllers/teamleadController')
 const trainerController = require('../controllers/trainerController')
