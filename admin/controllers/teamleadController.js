@@ -88,6 +88,7 @@ exports.updateTeamlead = async (req, res) => {
         password: req.body.password,
         city: req.body.city,
         image: req.file.filename,
+        
       };
 
       const teamlead = await teamleadModel.findByIdAndUpdate(
