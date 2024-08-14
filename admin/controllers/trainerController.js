@@ -1,5 +1,6 @@
 const trainerModel = require("../../admin/models/trainerModel");
 const multer = require("multer");
+const jwt = require("jsonwebtoken")
 
 const storage = multer.diskStorage({
   destination: "images/",
@@ -43,6 +44,29 @@ exports.addTrainer = async (req, res) => {
     }
   });
 };
+
+//trainer login
+
+exports.trainerlogin = async (req, res) => {
+  try {
+    const trainer = await trainerModel.findOne({
+      email: req.body.email,
+      password: req.body.password,
+    });
+    if (!trainer) {
+      return res.status(404).json("error");
+    }
+    const trainerPassKey = "task-tracker";
+    const token = jwt.sign({ email: trainer.email }, trainerPassKey, {
+      expiresIn: "2hr",
+    });
+    res.status(200).json({ trainer, token });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "no data found" });
+  }
+};
+
 
 //update trainer
 exports.updateTrainer = async (req, res) => {
