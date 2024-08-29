@@ -26,10 +26,11 @@ exports.addTrainer = async (req, res) => {
       }
 
       const trainerData = {
+        trainerId: req.body.trainerId,
         name: req.body.name,
         role: req.body.role,
         email: req.body.email,
-        phoneNumber: req.body.phoneNumber,
+        mobile: req.body.mobile,
         password: req.body.password,
         city: req.body.city,
         image: req.file.filename,
@@ -44,6 +45,18 @@ exports.addTrainer = async (req, res) => {
     }
   });
 };
+
+// trainer view
+exports.viewTrainer = async (req, res) => {
+  try {
+    const view = await trainerModel.find();
+    res.status(200).json(view);
+  } catch (e) {
+    console.log(e);
+    res.status(500).json("Internal server Error");
+  }
+};
+
 
 //trainer login
 
@@ -81,6 +94,7 @@ exports.updateTrainer = async (req, res) => {
         return res.status(400).json({ error: "No file uploaded" });
       }
       const trainerData = {
+        trainerId: req.body.trainerId,
         name: req.body.name,
         role: req.body.role,
         email: req.body.email,

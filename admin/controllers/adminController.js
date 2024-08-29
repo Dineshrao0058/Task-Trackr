@@ -33,6 +33,17 @@ exports.adminlogin = async (req, res) => {
   }
 };
 
+//admin get
+exports.getAdmin = async (req, res) => {
+  try {
+    const view = await adminModel.find();
+    res.status(200).json(view);
+  } catch (e) {
+    console.log(e);
+    res.status(500).json("Internal server Error");
+  }
+};
+
 //admin Update
 exports.adminUpdate = async (req, res) => {
   try {

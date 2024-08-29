@@ -24,6 +24,7 @@ exports.addTeamlead = async (req, res) => {
       }
 
       const teamleadData = {
+        teamLeadId:req.body.teamLeadId,
         name: req.body.name,
         role: req.body.role,
         email: req.body.email,
@@ -42,6 +43,17 @@ exports.addTeamlead = async (req, res) => {
       return res.status(500).json({ error: "Internal Server Error" });
     }
   });
+};
+
+//teamlead get
+exports.getTeamlead = async (req, res) => {
+  try {
+    const view = await teamleadModel.find();
+    res.status(200).json(view);
+  } catch (e) {
+    console.log(e);
+    res.status(500).json("Internal server Error");
+  }
 };
 
 // teamlead login
@@ -81,6 +93,7 @@ exports.updateTeamlead = async (req, res) => {
         return res.status(400).json({ error: "No file uploaded" });
       }
       const teamleadData = {
+        teamLeadId:req.body.teamLeadId,
         name: req.body.name,
         role: req.body.role,
         email: req.body.email,
