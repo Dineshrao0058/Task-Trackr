@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 const teamleadSchema = new mongoose.Schema(
   {
+    teamLeadId:{
+      type:String
+
+    },
     name: {
       type: String,
     },
